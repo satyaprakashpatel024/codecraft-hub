@@ -1,0 +1,12 @@
+[ {
+  "id" : "b3dbddef-1640-4487-9970-9cd9728a4497",
+  "title" : "Java Mastery",
+  "description" : "Became master in java",
+  "instructor" : "justin tod",
+  "category" : "Backend",
+  "price" : 199.0,
+  "durationHours" : 18,
+  "status" : "PUBLISHED",
+  "createdAt" : "2026-03-11T23:55:18",
+  "updatedAt" : "2026-03-11T23:55:18"
+} ]
