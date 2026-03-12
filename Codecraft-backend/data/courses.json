@@ -9,4 +9,15 @@
   "status" : "PUBLISHED",
   "createdAt" : "2026-03-11T23:55:18",
   "updatedAt" : "2026-03-11T23:55:18"
+}, {
+  "id" : "6b19970b-aa38-49b0-9a9a-d64355df40aa",
+  "title" : "java",
+  "description" : "java + DSA",
+  "instructor" : "lee chan",
+  "category" : "dsa",
+  "price" : 109.0,
+  "durationHours" : 15,
+  "status" : "PUBLISHED",
+  "createdAt" : "2026-03-12T22:35:37",
+  "updatedAt" : "2026-03-12T22:35:37"
 } ]

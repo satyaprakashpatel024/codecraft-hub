@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraftHub: Your Learning Management Platform</title>
+    <style>
+        :root {
+            --primary: #8B5CF6;
+            --success: #F59E0B;
+            --danger: #EF4444;
+            --bg: #f9fafb;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { color: var(--primary); font-size: 2.25rem; font-weight: 800; }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .full-width { grid-column: 1 / -1; }
+        .form-group { margin-bottom: 0.5rem; }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.65rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background-color: #8B5CF6; width: 100%; margin-top: 1rem; }
+        .btn-success { background-color: #F59E0B; }
+        .btn-danger { background-color: var(--danger); }
+        .btn-outline { background: transparent; border: 1px solid #d1d5db; color: var(--text-light); }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .status-draft { background: #f3f4f6; color: #374151; }
+        .status-published { background: #eef2ff; color: #4338ca; }
+        .status-archived { background: #fee2e2; color: #b91c1c; }
+
+        .instructor-tag { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 0.5rem; display: block; }
+        .course-desc { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; flex-grow: 1; }
+
+        .meta-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            background: #f9fafb;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .actions { display: flex; gap: 0.5rem; }
+        .actions button { flex: 1; font-size: 0.8rem; padding: 0.5rem; }
+
+        .alert { padding: 1rem; border-radius: 6px; margin-bottom: 1rem; display: none; font-size: 0.9rem; }
+        .alert-error { background: #fee2e2; color: #b91c1c; display: block; border: 1px solid #fca5a5; }
+        .alert-success { background: #ecfdf5; color: #047857; display: block; border: 1px solid #6ee7b7; }
+
+        .loader { text-align: center; padding: 2rem; color: var(--primary); font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>CodeCraftHub: Learning Management</h1>
+    </header>
+
+    <div class="card">
+        <h2 class="section-title">Register New Course</h2>
+        <div id="messageContainer"></div>
+        <form id="courseForm">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Course Title *</label>
+                    <input type="text" id="title" required minlength="3" maxlength="200">
+                </div>
+                <div class="form-group">
+                    <label>Instructor *</label>
+                    <input type="text" id="instructor" required>
+                </div>
+                <div class="form-group">
+                    <label>Category *</label>
+                    <input type="text" id="category" required>
+                </div>
+                <div class="form-group">
+                    <label>Price ($) *</label>
+                    <input type="number" id="price" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Duration (Hours) *</label>
+                    <input type="number" id="durationHours" min="1" max="1000" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="status">
+                        <option value="DRAFT">Draft</option>
+                        <option value="PUBLISHED">Published</option>
+                        <option value="ARCHIVED">Archived</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label>Description *</label>
+                    <textarea id="description" rows="3" required minlength="10" maxlength="2000"></textarea>
+                </div>
+            </div>
+            <button type="submit" id="submitBtn" class="btn btn-primary">Create Course</button>
+        </form>
+    </div>
+
+    <h2 class="section-title">Course Catalog</h2>
+    <div id="loader" class="loader" style="display: none;">Syncing with API...</div>
+    <div id="courseContainer" class="course-list"></div>
+</div>
+
+<script>
+    const API_URL = "http://localhost:8080/api/courses";
+    const courseForm = document.getElementById('courseForm');
+    const courseContainer = document.getElementById('courseContainer');
+    const loader = document.getElementById('loader');
+    const messageContainer = document.getElementById('messageContainer');
+
+    let courses = [];
+
+    // --- API Operations ---
+
+    async function fetchCourses() {
+        toggleLoader(true);
+        try {
+            const response = await fetch(API_URL);
+            console.log(response.data);
+            if (!response.ok) throw new Error('Failed to fetch catalog');
+            const data = await response.json();
+            courses = Array.isArray(data) ? data : data.courses || [];
+            renderCourses();
+        } catch (err) {
+            showMessage(err.message, 'error');
+        } finally {
+            toggleLoader(false);
+        }
+    }
+
+    async function handleAddCourse(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+
+        const payload = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            instructor: document.getElementById('instructor').value,
+            category: document.getElementById('category').value,
+            price: parseFloat(document.getElementById('price').value),
+            durationHours: parseInt(document.getElementById('durationHours').value),
+            status: document.getElementById('status').value
+        };
+
+        setLoadingState(submitBtn, true, 'Processing...');
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Validation failed on server');
+            }
+
+            showMessage('Course created successfully!', 'success');
+            courseForm.reset();
+            fetchCourses();
+        } catch (err) {
+            showMessage(err.message, 'error');
+        } finally {
+            setLoadingState(submitBtn, false, 'Create Course');
+        }
+    }
+
+    async function deleteCourse(id) {
+        if (!confirm('Permanently delete this course?')) return;
+        try {
+            const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            if (!response.ok) throw new Error('Delete operation failed');
+            showMessage('Course deleted', 'success');
+            fetchCourses();
+        } catch (err) {
+            showMessage(err.message, 'error');
+        }
+    }
+
+    async function updateCourse(id, updatedData) {
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            });
+            if (!response.ok) throw new Error('Update failed');
+            fetchCourses();
+        } catch (err) {
+            showMessage(err.message, 'error');
+        }
+    }
+
+    // --- UI Logic ---
+
+    function renderCourses() {
+        if (courses.length === 0) {
+            courseContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #9ca3af;">Catalog is empty.</p>';
+            return;
+        }
+
+        courseContainer.innerHTML = courses.map(course => `
+            <div class="course-card" id="card-${course.id}">
+                <div class="course-header">
+                    <span class="status-badge status-${course.status.toLowerCase()}">${course.status}</span>
+                    <strong style="color: var(--text-dark)">$${course.price.toFixed(2)}</strong>
+                </div>
+                <h3 style="margin-bottom: 0.2rem;">${escapeHtml(course.title)}</h3>
+                <span class="instructor-tag">By ${escapeHtml(course.instructor)}</span>
+                <p class="course-desc">${escapeHtml(course.description)}</p>
+                <div class="meta-info">
+                    <span>📂 ${escapeHtml(course.category)}</span>
+                    <span>⏱️ ${course.durationHours} hrs</span>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-success" onclick="setupEdit('${course.id}')">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteCourse('${course.id}')">Remove</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function setupEdit(id) {
+        const c = courses.find(item => String(item.id) === String(id));
+        const card = document.getElementById(`card-${id}`);
+
+        card.innerHTML = `
+            <div class="form-group"><label>Title</label><input type="text" id="edit-title-${id}" value="${escapeHtml(c.title)}"></div>
+            <div class="form-group"><label>Price</label><input type="number" id="edit-price-${id}" value="${c.price}"></div>
+            <div class="form-group">
+                <label>Status</label>
+                <select id="edit-status-${id}">
+                    <option value="DRAFT" ${c.status === 'DRAFT' ? 'selected' : ''}>Draft</option>
+                    <option value="PUBLISHED" ${c.status === 'PUBLISHED' ? 'selected' : ''}>Published</option>
+                    <option value="ARCHIVED" ${c.status === 'ARCHIVED' ? 'selected' : ''}>Archived</option>
+                </select>
+            </div>
+            <div class="actions" style="margin-top:10px">
+                <button class="btn btn-success" onclick="handleEditSave('${id}')">Save</button>
+                <button class="btn btn-outline" onclick="renderCourses()">Cancel</button>
+            </div>
+        `;
+    }
+
+    function handleEditSave(id) {
+        const updatedData = {
+            title: document.getElementById(`edit-title-${id}`).value,
+            price: parseFloat(document.getElementById(`edit-price-${id}`).value),
+            status: document.getElementById(`edit-status-${id}`).value,
+            // Keeping other fields from existing object to satisfy DTO if partial update isn't supported
+            ...courses.find(c => String(c.id) === String(id))
+        };
+        // Merge edited values
+        updatedData.title = document.getElementById(`edit-title-${id}`).value;
+        updatedData.price = parseFloat(document.getElementById(`edit-price-${id}`).value);
+        updatedData.status = document.getElementById(`edit-status-${id}`).value;
+
+        updateCourse(id, updatedData);
+    }
+
+    // --- Helpers ---
+
+    function toggleLoader(show) { loader.style.display = show ? 'block' : 'none'; }
+
+    function setLoadingState(btn, isLoading, text) {
+        btn.disabled = isLoading;
+        btn.innerText = text;
+    }
+
+    function showMessage(text, type) {
+        messageContainer.innerHTML = `<div class="alert alert-${type}">${text}</div>`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => { messageContainer.innerHTML = ''; }, 5000);
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    courseForm.addEventListener('submit', handleAddCourse);
+    fetchCourses();
+</script>
+</body>
+</html>

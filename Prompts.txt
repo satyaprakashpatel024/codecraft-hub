@@ -1,0 +1,328 @@
+
+Module 5 Cheat Sheet: Top Generative AI Prompts for Software Developers
+Estimated time: 5 minutes
+
+Generative AI has transformed how developers approach every stage of software creation—from brainstorming to deployment. The following curated prompts, organized by each Software Development Life Cycle (SDLC) phase, are designed to help you integrate AI effectively into your workflow.
+
+The requirements analysis and planning phase
+Prompt 1: User story generation
+Purpose: Transform high-level requirements into detailed user stories.
+
+Prompt Template:
+Act as a product analyst. I need to create user stories for [feature/project description].
+Generate 5–7 user stories following this format:
+
+As a [user type]
+I want [goal]
+So that [benefit]
+[Include acceptance criteria for each story and consider edge cases and personas.]
+Best practice: Provide target user context and domain constraints.
+
+Prompt 2: Requirements clarification and gap analysis
+Purpose: Identify missing or ambiguous requirements.
+
+Prompt Template:
+Review the following requirements document: [paste requirements].
+Analyze and provide:
+
+Missing or unclear requirements
+Potential conflicts
+Needed non-functional requirements
+Questions for stakeholders
+Risk areas needing more detail
+Best practice: Revisit the prompt you use as your requirements evolve.
+
+Prompt 3: Technical feasibility assessment
+Purpose: Evaluate technical constraints and feasibility.
+
+Prompt Template:
+I'm planning to build [project] with these requirements: [list].
+Tech stack: [technologies] | Team: [# devs] | Timeline: [duration]
+Provide:
+
+Feasibility rating (1–10 with reasoning)
+Risks/challenges
+Alternatives
+Estimated component complexity
+Stack recommendations
+Best practice: Be transparent about team limits.
+
+Design phase
+Prompt 4: System architecture design
+Purpose: Create high-level architecture diagrams.
+
+Prompt Template:
+Design a system architecture for [app description].
+Include:
+
+Architecture pattern with justification
+Main components and responsibilities
+Data flow
+Technology stack
+Scalability and security notes
+Best practice: Ask for ASCII or text diagrams.
+
+Prompt 5: Database schema design
+Purpose: Define optimal schemas.
+
+Prompt Template:
+Design a database schema for [app description].
+Include:
+
+ER diagram description
+Table structures with datatypes
+Indexing plan
+Normalization reasoning
+Bottlenecks and solutions
+Best practice: Add real query patterns for accuracy.
+
+Prompt 6: API design
+Purpose: Design clean RESTful APIs.
+
+Prompt Template:
+Design a REST API for [service].
+Include:
+
+Endpoints, methods, descriptions
+Request/response schemas
+Status codes
+Auth strategy
+Versioning and rate limiting
+Best practice: Specify whether you are using GraphQL or gRPC.
+
+Prompt 7: Design pattern selection
+Purpose: Pick the best design pattern.
+
+Prompt Template:
+I need to implement [problem].
+Context: [language, framework, constraints].
+Suggest the:
+
+Best pattern(s) and why
+Pattern structure
+Pros/cons
+Example code skeleton
+Pitfalls
+Best practice: Provide specific context.
+
+Development / Implementation phase
+Prompt 8: Code generation with best practices
+Purpose: Generate production-ready code.
+
+Prompt Template:
+Write [language] code for [functionality].
+Requirements: [details], follow [style guide], include error handling and comments.
+
+Provide:
+
+Implementation
+Validation and logging
+Error handling
+Type hints
+
+Best practice: Always test AI code before deployment.
+
+Prompt 9: Code review and optimization
+Purpose: Receive AI code review feedback.
+
+Prompt Template:
+Review this [language] code: [paste code].
+Evaluate the:
+
+Readability
+Performance
+Security
+Maintainability
+Refactoring suggestions
+Best practice: Focus on top concerns.
+
+Prompt 10: Debugging assistant
+Purpose: Diagnose and fix bugs.
+
+Prompt Template:
+I'm experiencing [bug description].
+Code: [paste] | Error: [stack trace] | Env: [details].
+Help me:
+
+Identify the cause
+Explain why
+Fix
+Prevent recurrence
+Best practice: Provide complete context.
+
+Prompt 11: Algorithm implementation
+Purpose: Implement optimized algorithms.
+
+Prompt Template:
+Implement an algorithm to [problem].
+Include the following information:
+
+An explanation
+Complexity analysis
+Code with comments
+Test cases
+Best practice: Clarify whether to optimize for time or space.
+
+Prompt 12: Code documentation generation
+Purpose: Generate documentation from code.
+
+Prompt Template:
+Generate documentation for this code: [paste].
+Include the:
+
+Module overview
+Function docs
+Return values
+Examples
+Dependencies
+Best practice: Match internal doc standards.
+
+Prompt 13: Refactoring assistant
+Purpose: Improve code structure.
+
+Prompt Template:
+Refactor this [language] code to improve [goal].
+Provide:
+
+Refactored version
+Explanation
+Risks
+Improvements
+Best practice: Specify focus area—readability, performance, or maintainability.
+
+Testing phase
+Prompt 14: Unit test generation
+Purpose: Create comprehensive tests.
+
+Prompt Template:
+Generate unit tests for this [language] code using [framework].
+Include: happy path, edge cases, errors, mocks.
+Use the Arrange–Act–Assert format.
+Best practice: Verify coverage and add missing cases.
+
+Prompt 15: Test case generation
+Purpose: Create structured test scenarios.
+
+Prompt Template:
+Generate test cases for [feature].
+Specify the:
+
+Test ID
+Description
+Preconditions
+Steps
+Expected results
+Priority
+Best practice: Add domain-specific tests.
+
+Prompt 16: Test data generation
+Purpose: Generate realistic datasets.
+
+Prompt Template:
+Generate test data for [entity/scenario].
+
+Specify the:
+
+Schema: [paste].
+Include valid, edge, and invalid data.
+Provide in JSON, CSV, or SQL format.
+Best practice: Define realistic distributions.
+
+Prompt 17: Bug report analysis
+Purpose: Analyze bug reports.
+
+Prompt Template:
+Analyze this bug report: [paste].
+Include the:
+
+Severity
+Root cause
+Affected modules
+Fix complexity
+Best practice: Add architecture context for clarity.
+
+Deployment phase
+Prompt 18: CI/CD pipeline configuration
+Purpose: Create automated pipelines.
+Prompt Template:
+
+Create a CI/CD configuration for [project] and Platform: [e.g., GitHub Actions, Jenkins].
+Include the following information:
+
+Stages and triggers
+Environment variables
+Rollback strategy
+Best practice: Test configurations before production.
+
+Prompt 19: Deployment documentation
+Purpose: Write deployment runbooks.
+
+Prompt Template:
+Create a deployment guide for [app].
+
+Include the following information:
+
+Pre-deployment checklist
+Step-by-step procedure
+Configurations
+Health checks
+Rollback
+Troubleshooting
+Best practice: Version with codebase.
+Maintenance phase
+Prompt 20: Legacy code understanding
+Purpose: Comprehend unfamiliar code quickly.
+Prompt Template:
+
+Explain this [language] code.
+
+
+Include the following information:
+
+A summary of functionality
+The step-by-step logic
+The dependencies
+The code smells and improvements
+
+Best practice: Start broadly, then focus on the specifics of the code.
+
+Prompt 21: Performance optimization
+Purpose: Identify bottlenecks and optimize code.
+
+Prompt Template:
+
+Optimize this [language] code.
+Specify the:
+
+Bottlenecks
+Complexity
+Optimization options
+Trade-offs
+Profiling recommendations
+Best practice: Compare before/after metrics.
+
+Summary
+In this reading, you gained the following insights into how you can use generative AI prompts to ease your software development:
+
+Requirements analysis and planning
+The Requirements Analysis and Planning phase uses generative AI to turn high-level goals into clear, testable user stories that guide development. Strong prompts reveal missing requirements, assess technical feasibility, and surface potential risks early. When user context and constraints are included, AI output becomes more accurate and actionable.
+
+Design phase
+The Design phase benefits from AI-generated architecture concepts, database schemas, and API structures aligned with scalability and security needs. Including system details and constraints enables AI to produce realistic, adaptable designs. Text-based architecture descriptions allow easy visualization and refinement before implementation.
+
+Development / Implementation phase
+The Development or Implementation phase leverages AI to accelerate coding through clean, standards-based, and maintainable code generation. Prompts for creation, review, and refactoring strengthen reliability and consistency. Iterative prompting—asking AI to explain and then enhance—to produce higher-quality results under human guidance.
+
+Testing phase
+The Testing phase uses AI to automate unit tests, generate test data, and analyze bugs with greater speed and coverage. Structured prompts help capture both everyday and edge-case scenarios efficiently. Human review remains essential to ensure accuracy and alignment with project requirements.
+
+Deployment phase
+The Deployment phase benefits from AI-driven automation that simplifies CI/CD setup and produces consistent deployment documentation. Well-structured prompts yield secure, repeatable workflows that reduce manual errors. Reviewing AI-generated configurations safeguards compliance and operational stability.
+
+Maintenance phase
+The Maintenance phase applies AI to help developers interpret legacy code, locate performance bottlenecks, and propose targeted optimizations. Context-rich prompts lead to straightforward explanations and actionable performance insights. Combining AI analysis with human validation ensures lasting reliability and efficient upkeep.
+
+Cross-phase insights
+Clear, contextual prompts produce the best AI results across all SDLC phases. Iterative refinement and expert review ensure outputs remain accurate, ethical, and secure. When applied thoughtfully, generative AI enhances productivity and innovation without replacing critical human expertise.
+
+cognitiveclass.ai logo
